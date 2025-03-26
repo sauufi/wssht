@@ -27,7 +27,8 @@ Clone this repository and build from source:
 ```bash
 git clone https://github.com/sauufi/wssht.git
 cd wssht
-./scripts/build.sh
+chmod +x ./scripts/build.sh
+sudo ./scripts/build.sh
 ```
 
 Binary will be created in the `bin/` directory.
@@ -37,6 +38,7 @@ Binary will be created in the `bin/` directory.
 For complete installation as a systemd service, run:
 
 ```bash
+chmod +x ./scripts/install.sh
 sudo ./scripts/install.sh
 ```
 

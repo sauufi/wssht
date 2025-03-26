@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"syscall"
 
-	"github.com/yourusername/wssht/internal/tunnel"
+	"github.com/sauufi/wssht/internal/tunnel"
 )
 
 const (
