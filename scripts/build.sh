@@ -21,13 +21,13 @@ echo "Build time: $BUILD_TIME"
 
 # Build for multiple platforms
 echo "Building Linux amd64..."
-GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version=$VERSION -X 'main.BuildTime=$BUILD_TIME'" -o bin/wssht-linux-amd64 cmd/proxy/main.go
+GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version=$VERSION -X 'main.BuildTime=$BUILD_TIME'" -o bin/wssht-linux-amd64 cmd/wssht/main.go
 
 echo "Building Linux arm64..."
-GOOS=linux GOARCH=arm64 go build -ldflags "-s -w -X main.Version=$VERSION -X 'main.BuildTime=$BUILD_TIME'" -o bin/wssht-linux-arm64 cmd/proxy/main.go
+GOOS=linux GOARCH=arm64 go build -ldflags "-s -w -X main.Version=$VERSION -X 'main.BuildTime=$BUILD_TIME'" -o bin/wssht-linux-arm64 cmd/wssht/main.go
 
 echo "Building Linux arm..."
-GOOS=linux GOARCH=arm go build -ldflags "-s -w -X main.Version=$VERSION -X 'main.BuildTime=$BUILD_TIME'" -o bin/wssht-linux-arm cmd/proxy/main.go
+GOOS=linux GOARCH=arm go build -ldflags "-s -w -X main.Version=$VERSION -X 'main.BuildTime=$BUILD_TIME'" -o bin/wssht-linux-arm cmd/wssht/main.go
 
 # Make a symlink to the linux-amd64 version as the default
 ln -sf wssht-linux-amd64 bin/wssht
