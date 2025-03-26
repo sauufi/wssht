@@ -25,7 +25,7 @@ A WebSocket proxy implementation for SSH in Go. This tool enables tunneling SSH 
 Clone this repository and build from source:
 
 ```bash
-git clone https://github.com/yourusername/wssht.git
+git clone https://github.com/sauufi/wssht.git
 cd wssht
 ./scripts/build.sh
 ```
@@ -58,16 +58,16 @@ Run the proxy with default options:
 wssht
 ```
 
-Specify address and port:
+Specify address, port and default target host:
 
 ```bash
-wssht -b 0.0.0.0 -p 8080
+wssht -b 0.0.0.0 -p 8080 -t 127.0.0.1:22
 ```
 
 Use password for authentication:
 
 ```bash
-wssht -b 0.0.0.0 -p 8080 -pass your_secure_password
+wssht -b 0.0.0.0 -p 8080 -t 127.0.0.1:22 -pass your_secure_password
 ```
 
 ### Service Management
@@ -121,8 +121,8 @@ WebSocket protocol is used to traverse firewalls or proxies that might block dir
 
 ```
 wssht/
-├── cmd/proxy/         # Main application code
-├── internal/proxy/    # Internal packages for server and handler
+├── cmd/wssht/         # Main application code
+├── internal/tunnel/   # Internal packages for server and handler
 ├── scripts/           # Build and installation scripts
 ├── systemd/           # Systemd configuration files
 └── README.md          # Documentation

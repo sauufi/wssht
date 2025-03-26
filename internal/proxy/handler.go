@@ -276,3 +276,4 @@ func (h *ConnectionHandler) Handle() {
 		h.server.PrintLog("- No X-Real-Host!")
 		h.client.Write([]byte("HTTP/1.1 400 NoXRealHost!\r\n\r\n"))
 	}
+}

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to install wssht as a systemd service
+# Script to install go-websocket-ssh-proxy as a systemd service
 # Run this script as root (sudo)
 
 # Exit on any error
@@ -39,12 +39,15 @@ chmod +x "$INSTALL_DIR/wssht"
 if [ ! -f "$CONFIG_DIR/config" ]; then
   echo "Creating default configuration..."
   cat > "$CONFIG_DIR/config" << EOF
-# Configuration for wssht
+# Configuration for WSSHTunnel
 # Override default settings
 
 # Listening address and port
 BIND_ADDR=0.0.0.0
 BIND_PORT=80
+
+# Default target host (used when X-Real-Host header is missing)
+DEFAULT_HOST=127.0.0.1:143
 
 # Set password (optional)
 # PASSWORD=your_secure_password
@@ -62,7 +65,7 @@ After=network.target
 Type=simple
 User=root
 EnvironmentFile=-/etc/wssht/config
-ExecStart=/usr/local/bin/wssht -b \${BIND_ADDR} -p \${BIND_PORT} \${PASSWORD:+-pass \$PASSWORD}
+ExecStart=/usr/local/bin/wssht -b \${BIND_ADDR} -p \${BIND_PORT} -t \${DEFAULT_HOST} \${PASSWORD:+-pass \$PASSWORD}
 Restart=on-failure
 RestartSec=5s
 KillMode=process

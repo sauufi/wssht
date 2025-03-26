@@ -6,30 +6,32 @@ import (
 	"sync"
 )
 
-const (
-	DEFAULT_HOST = "127.0.0.1:143"
-)
-
 // Server represents the proxy server
 type Server struct {
-	host      string
-	port      int
-	pass      string
-	running   bool
-	listener  net.Listener
-	handlers  []*ConnectionHandler
-	handlerMu sync.Mutex
-	logMu     sync.Mutex
+	host       string
+	port       int
+	pass       string
+	defaultHost string
+	running    bool
+	listener   net.Listener
+	handlers   []*ConnectionHandler
+	handlerMu  sync.Mutex
+	logMu      sync.Mutex
 }
 
 // NewServer creates a new Server instance
-func NewServer(host string, port int, pass string) *Server {
+func NewServer(host string, port int, pass string, defaultHost string) *Server {
+	if defaultHost == "" {
+		defaultHost = "127.0.0.1:143" // Default fallback value
+	}
+	
 	return &Server{
-		host:     host,
-		port:     port,
-		pass:     pass,
-		running:  false,
-		handlers: make([]*ConnectionHandler, 0),
+		host:       host,
+		port:       port,
+		pass:       pass,
+		defaultHost: defaultHost,
+		running:    false,
+		handlers:   make([]*ConnectionHandler, 0),
 	}
 }
 
@@ -122,5 +124,5 @@ func (s *Server) GetPass() string {
 
 // GetDefaultHost returns the default host to connect to if none specified
 func (s *Server) GetDefaultHost() string {
-	return DEFAULT_HOST
+	return s.defaultHost
 }

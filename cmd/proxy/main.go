@@ -8,12 +8,13 @@ import (
 	"strconv"
 	"syscall"
 
-	"github.com/sauufi/wssht/internal/proxy"
+	"github.com/yourusername/wssht/internal/tunnel"
 )
 
 const (
 	DEFAULT_ADDR = "0.0.0.0"
 	DEFAULT_PORT = 80
+	DEFAULT_HOST = "127.0.0.1:143"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 	hostPtr := flag.String("b", DEFAULT_ADDR, "Binding address")
 	portPtr := flag.Int("p", DEFAULT_PORT, "Listening port")
 	passPtr := flag.String("pass", "", "Password for authentication")
+	defHostPtr := flag.String("t", DEFAULT_HOST, "Default target host:port")
 	flag.Parse()
 
 	// Override with positional argument if provided
@@ -36,10 +38,10 @@ func main() {
 	fmt.Println("\n:-------WSSHTunnel-------:")
 	fmt.Println("Listening addr:", *hostPtr)
 	fmt.Println("Listening port:", listeningPort)
-	fmt.Println(":-----------------------------------:\n")
+	fmt.Println("Default target:", *defHostPtr)
+	fmt.Println(":----------------------:\n")
 
-	// Create new server
-	server := proxy.NewServer(*hostPtr, listeningPort, *passPtr)
+
 
 	// Setup signal handling for graceful shutdown
 	sigChan := make(chan os.Signal, 1)
