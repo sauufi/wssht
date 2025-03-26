@@ -1,0 +1,16 @@
+[Unit]
+Description=WSSHTunnel - WebSocket SSH Proxy
+After=network.target
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=-/etc/wssht/config
+ExecStart=/usr/local/bin/wssht -b ${BIND_ADDR} -p ${BIND_PORT} ${PASSWORD:+-pass $PASSWORD}
+Restart=on-failure
+RestartSec=5s
+KillMode=process
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
