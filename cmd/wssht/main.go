@@ -41,7 +41,8 @@ func main() {
 	fmt.Println("Default target:", *defHostPtr)
 	fmt.Println(":----------------------:\n")
 
-
+	// Create new server
+	server := proxy.NewServer(*hostPtr, listeningPort, *passPtr, *defHostPtr)
 
 	// Setup signal handling for graceful shutdown
 	sigChan := make(chan os.Signal, 1)
